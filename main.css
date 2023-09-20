@@ -1,3 +1,29 @@
-#testBtn {
-    color: red;
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #202020;
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    background-color: grey;
+    height: 64vh;
+    width: 64vh;
+    align-self: center;
+}
+
+#gridElement {
+    background-color: black;
+    width: 4vh;
+    height: 4vh;
 }
