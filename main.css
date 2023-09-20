@@ -22,8 +22,8 @@ body {
     align-self: center;
 }
 
-#gridElement {
-    background-color: black;
+.gridElement {
+    background-color: rgb(114, 111, 111);
     width: 4vh;
     height: 4vh;
 }
