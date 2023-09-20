@@ -17,13 +17,17 @@ body {
     justify-content: space-between;
 
     background-color: grey;
+    /*
     height: 64vh;
     width: 64vh;
+    max-height: 960px;
+    max-width: 960px;
+    */
+    height: 960px;
+    width: 960px;
     align-self: center;
 }
 
 .gridElement {
     background-color: rgb(114, 111, 111);
-    width: 4vh;
-    height: 4vh;
 }
