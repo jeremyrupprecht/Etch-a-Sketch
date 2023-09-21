@@ -1,6 +1,15 @@
 const GRID_DIMENSIONS_IN_PIXELS = 960;
 
+function clearAllExistingDivs() {
+    const allPreviousDivs = document.querySelectorAll(".gridElement");
+    allPreviousDivs.forEach((div) => {
+        div.remove();
+    });
+}
+
 function createDivs (numberOfDivs) {
+
+    clearAllExistingDivs();
 
     for (let i = 0; i < numberOfDivs; i++) {
         const div = document.createElement("div");
@@ -27,9 +36,22 @@ let mouseDown = false;
 document.addEventListener("mousedown", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
 
-// Multiples of 16 to 100(ish) --> 16, 32, 48, 64, 80, 86, 112
-let numberOfRowsAndColumns = +prompt("Enter a grid size:");
-let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
-
+// Create a grid
 const grid = document.getElementById("grid");
+let numberOfRowsAndColumns = 32;
+let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
+
+// Create a slider to adjust grid size, every time the slider value changes, 
+// recalculate the grid to the specified size
+let gridSizeSlider = document.getElementById("myRange");
+let displayGridSize = document.getElementById("displayGridSize");
+displayGridSize.textContent = "32 x 32";
+
+gridSizeSlider.oninput = function() {
+    displayGridSize.textContent = `${this.value} x ${this.value}`;
+    numberOfRowsAndColumns = this.value
+    divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
+    createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
+}
+

@@ -17,8 +17,9 @@ body {
     font-size: 112px;
 }
 
-.displayGridSize {
-    
+#displayGridSize {
+    text-align: center;
+    font-size: 32px;
 }
 
 #sideBar {
@@ -26,7 +27,7 @@ body {
     /* border: solid 5px blue; */
     width: 1300px;
 }
-.leftSide {
+#leftSide {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +85,7 @@ body {
     background-color: rgb(114, 111, 111);
 }
 
-.footer {
+#footer {
     text-align: center;
     margin-top: auto;
     font-size: 48px;
