@@ -48,6 +48,26 @@ let gridSizeSlider = document.getElementById("myRange");
 let displayGridSize = document.getElementById("displayGridSize");
 displayGridSize.textContent = "32 x 32";
 
+let isSliderDragging = false;
+
+gridSizeSlider.addEventListener("input", () => {
+    isSliderDragging = true;
+    displayGridSize.textContent = `${gridSizeSlider.value} x ${gridSizeSlider.value}`;
+});
+
+document.addEventListener("mouseup", () => {
+    if (isSliderDragging) {
+        numberOfRowsAndColumns = gridSizeSlider.value
+        divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
+        createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
+    }
+    isSliderDragging = false;
+});
+
+
+
+/*
+
 gridSizeSlider.oninput = function() {
     displayGridSize.textContent = `${this.value} x ${this.value}`;
     numberOfRowsAndColumns = this.value
@@ -55,3 +75,4 @@ gridSizeSlider.oninput = function() {
     createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 }
 
+*/
