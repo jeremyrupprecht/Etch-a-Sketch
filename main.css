@@ -1,14 +1,20 @@
 html, body {
     margin: 0;
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #202020;
+}
+
+#title {
+    font-size: 112px;
 }
 
 #grid {
@@ -17,12 +23,6 @@ body {
     justify-content: space-between;
 
     background-color: grey;
-    /*
-    height: 64vh;
-    width: 64vh;
-    max-height: 960px;
-    max-width: 960px;
-    */
     height: 960px;
     width: 960px;
     align-self: center;
