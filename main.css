@@ -24,7 +24,6 @@ body {
 
 #sideBar {
     display: flex;
-    /* border: solid 5px blue; */
     width: 1300px;
 }
 #leftSide {
@@ -33,6 +32,21 @@ body {
     justify-content: center;
     width: 300px;
     margin-right: 30px;
+}
+
+#rainbowButton, #shaderButton, #clearButton {
+    height: 48px;
+    border-radius: 10px;
+    font-size: 24px;
+    background-color: rgb(19, 19, 19);
+    border: 1px solid white;
+    color: white;
+    margin-top: 40px;
+    transition-duration: 0.2s;
+}
+
+#rainbowButton:hover, #shaderButton:hover, #clearButton:hover {
+    transform: scale(1.1);
 }
 
 /* Range slider */
@@ -68,7 +82,7 @@ body {
   }
 
 
-/* Sketch Grid */
+/* Grid */
 
 #grid {
     display: flex;

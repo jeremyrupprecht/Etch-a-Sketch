@@ -48,8 +48,9 @@ let gridSizeSlider = document.getElementById("myRange");
 let displayGridSize = document.getElementById("displayGridSize");
 displayGridSize.textContent = "32 x 32";
 
+// Only recalculate the grid once the user moves the slider and releases 
+// the mouse button, to avoid 
 let isSliderDragging = false;
-
 gridSizeSlider.addEventListener("input", () => {
     isSliderDragging = true;
     displayGridSize.textContent = `${gridSizeSlider.value} x ${gridSizeSlider.value}`;
@@ -63,16 +64,3 @@ document.addEventListener("mouseup", () => {
     }
     isSliderDragging = false;
 });
-
-
-
-/*
-
-gridSizeSlider.oninput = function() {
-    displayGridSize.textContent = `${this.value} x ${this.value}`;
-    numberOfRowsAndColumns = this.value
-    divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
-    createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
-}
-
-*/
