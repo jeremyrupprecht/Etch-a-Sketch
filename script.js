@@ -1,7 +1,7 @@
 const GRID_DIMENSIONS_IN_PIXELS = 960;
 
 function clearAllExistingDivs() {
-    const allPreviousDivs = document.querySelectorAll(".gridElement");
+    const allPreviousDivs = document.querySelectorAll(".gridDiv");
     allPreviousDivs.forEach((div) => {
         div.remove();
     });
@@ -13,19 +13,25 @@ function createDivs (numberOfDivs) {
 
     for (let i = 0; i < numberOfDivs; i++) {
         const div = document.createElement("div");
-        div.classList.add("gridElement");
+        div.classList.add("gridDiv");
         // Each div is the size of the grid divided by the selected number of
         // grid rows/columns
         div.style.height = `${divSize}px`;
         div.style.width = `${divSize}px`;
         grid.appendChild(div);
         div.addEventListener("mousemove", changeColor);
+        div.addEventListener("click", changeColor);
         // To disable the browers default dragging behavior
         div.ondragstart = () => {return false};
     }
 }
 
 function changeColor(e) {
+    if (e.type === "click") {
+        this.style.backgroundColor = "black";
+    }
+    // Only draw if the move is down, to prevent 
+    // dragging behavior
     if (!mouseDown) return;
     this.style.backgroundColor = "black";
 }
@@ -34,22 +40,31 @@ function changeColor(e) {
 // mousedown events which have issues with dragging 
 let mouseDown = false;
 document.addEventListener("mousedown", () => mouseDown = true);
+//document.addEventListener("click", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
 
-// Create a grid
 const grid = document.getElementById("grid");
 let numberOfRowsAndColumns = 32;
 let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
-// Create a slider to adjust grid size, every time the slider value changes, 
-// recalculate the grid to the specified size
-let gridSizeSlider = document.getElementById("myRange");
-let displayGridSize = document.getElementById("displayGridSize");
-displayGridSize.textContent = "32 x 32";
 
-// Only recalculate the grid once the user moves the slider and releases 
-// the mouse button, to avoid 
+
+
+
+
+const clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", () => {
+    createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
+});
+
+const gridSizeSlider = document.getElementById("myRange");
+let displayGridSize = document.getElementById("displayGridSize");
+displayGridSize.textContent = "40 x 40";
+
+// Recalculate grid size every time the slider changes, but only do so
+// once the user moves the slider AND releases the mouse button, to avoid 
+// unecessary calculation while the user is moving the slider
 let isSliderDragging = false;
 gridSizeSlider.addEventListener("input", () => {
     isSliderDragging = true;
