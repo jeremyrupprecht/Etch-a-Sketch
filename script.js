@@ -27,6 +27,15 @@ function createDivs (numberOfDivs) {
 }
 
 function changeColor(e) {
+
+    if (penMode === "black") {
+        penColor = "black";
+    } else if (penMode === "rainbow") {
+        penColor ="#" + Math.floor(Math.random()*16777215).toString(16);
+    } else if (penMode === "erase") {
+        penColor = "rgb(114, 111, 111)";
+    }
+
     if (e.type === "click") {
         this.style.backgroundColor = penColor;
     }
@@ -47,19 +56,26 @@ let numberOfRowsAndColumns = 32;
 let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
-let penColor = "black";
+let penMode = "black";
 const drawButton = document.getElementById("drawButton");
 drawButton.addEventListener("click", () => {
-    penColor = "black";
+    penMode = "black";
 })
 
 // Rainbow
 
+const rainbowButton = document.getElementById("rainbowButton");
+rainbowButton.addEventListener("click", () => {
+    penMode = "rainbow";
+})
+
 // Shader
+
+const shaderButton = document.getElementById("shaderButton");
 
 const eraserButton = document.getElementById("eraserButton");
 eraserButton.addEventListener("click", () => {
-    penColor = "rgb(114, 111, 111)";
+    penMode = "erase"
 })
 
 const clearButton = document.getElementById("clearButton");
