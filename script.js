@@ -26,12 +26,26 @@ function createDivs (numberOfDivs) {
     }
 }
 
-function changeColor(e) {
+// Darken an RGB value by 10% by multiplying each value by 0.9
+function darkenColorTenPercent(color) {
+    const parts = color.match(/\d+/g);
+    if (parts && parts.length === 3) {
+        const r = Math.round(parts[0] * (0.9));
+        const g = Math.round(parts[1] * (0.9));
+        const b = Math.round(parts[2] * (0.9));
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+    // Return the original color if parsing fails
+    return rgbColor; 
+}
 
+function changeColor(e) {    
     if (penMode === "black") {
         penColor = "black";
     } else if (penMode === "rainbow") {
         penColor ="#" + Math.floor(Math.random()*16777215).toString(16);
+    } else if (penMode === "shader") {
+        penColor = darkenColorTenPercent(`${getComputedStyle(this).backgroundColor}`);
     } else if (penMode === "erase") {
         penColor = "rgb(114, 111, 111)";
     }
@@ -58,25 +72,16 @@ createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
 let penMode = "black";
 const drawButton = document.getElementById("drawButton");
-drawButton.addEventListener("click", () => {
-    penMode = "black";
-})
-
-// Rainbow
+drawButton.addEventListener("click", () => penMode = "black");
 
 const rainbowButton = document.getElementById("rainbowButton");
-rainbowButton.addEventListener("click", () => {
-    penMode = "rainbow";
-})
-
-// Shader
+rainbowButton.addEventListener("click", () => penMode = "rainbow");
 
 const shaderButton = document.getElementById("shaderButton");
+shaderButton.addEventListener("click", () => penMode = "shader");
 
 const eraserButton = document.getElementById("eraserButton");
-eraserButton.addEventListener("click", () => {
-    penMode = "erase"
-})
+eraserButton.addEventListener("click", () => penMode = "erase");
 
 const clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", () => createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns));
