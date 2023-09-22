@@ -28,12 +28,12 @@ function createDivs (numberOfDivs) {
 
 function changeColor(e) {
     if (e.type === "click") {
-        this.style.backgroundColor = "black";
+        this.style.backgroundColor = penColor;
     }
     // Only draw if the move is down, to prevent 
     // dragging behavior
     if (!mouseDown) return;
-    this.style.backgroundColor = "black";
+    this.style.backgroundColor = penColor;
 }
 
 // Track mousemove events only when when the mouse is down, instead of tracking
@@ -48,15 +48,17 @@ let numberOfRowsAndColumns = 32;
 let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
+let penColor = "black";
 
 
-
+const eraserButton = document.getElementById("eraserButton");
+eraserButton.addEventListener("click", () => {
+    penColor = "rgb(114, 111, 111)";
+})
 
 
 const clearButton = document.getElementById("clearButton");
-clearButton.addEventListener("click", () => {
-    createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
-});
+clearButton.addEventListener("click", () => createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns));
 
 const gridSizeSlider = document.getElementById("myRange");
 let displayGridSize = document.getElementById("displayGridSize");
