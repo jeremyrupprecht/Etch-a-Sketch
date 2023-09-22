@@ -35,7 +35,7 @@ body {
     margin-right: 30px;
 }
 
-#rainbowButton, #shaderButton, #clearButton, #eraserButton {
+#rainbowButton, #shaderButton, #clearButton, #eraserButton, #drawButton {
     height: 48px;
     border-radius: 10px;
     font-size: 24px;
@@ -46,7 +46,7 @@ body {
     transition-duration: 0.2s;
 }
 
-#rainbowButton:hover, #shaderButton:hover, #clearButton:hover, #eraserButton:hover {
+#rainbowButton:hover, #shaderButton:hover, #clearButton:hover, #eraserButton:hover, #drawButton:hover {
     transform: scale(1.1);
 }
 

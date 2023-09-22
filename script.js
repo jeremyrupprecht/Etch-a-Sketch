@@ -40,7 +40,6 @@ function changeColor(e) {
 // mousedown events which have issues with dragging 
 let mouseDown = false;
 document.addEventListener("mousedown", () => mouseDown = true);
-//document.addEventListener("click", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
 
 const grid = document.getElementById("grid");
@@ -49,13 +48,19 @@ let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
 let penColor = "black";
+const drawButton = document.getElementById("drawButton");
+drawButton.addEventListener("click", () => {
+    penColor = "black";
+})
 
+// Rainbow
+
+// Shader
 
 const eraserButton = document.getElementById("eraserButton");
 eraserButton.addEventListener("click", () => {
     penColor = "rgb(114, 111, 111)";
 })
-
 
 const clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", () => createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns));
