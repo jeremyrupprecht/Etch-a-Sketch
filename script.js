@@ -59,6 +59,10 @@ function changeColor(e) {
     this.style.backgroundColor = penColor;
 }
 
+function toggleGridLines(gridLinesBool) {
+    console.log("sup");
+}
+
 // Track mousemove events only when when the mouse is down, instead of tracking
 // mousedown events which have issues with dragging 
 let mouseDown = false;
@@ -82,6 +86,19 @@ shaderButton.addEventListener("click", () => penMode = "shader");
 
 const eraserButton = document.getElementById("eraserButton");
 eraserButton.addEventListener("click", () => penMode = "erase");
+
+let gridLinesOn = false;
+const toggleGridLinesButton = document.getElementById("toggleGridLinesButton");
+toggleGridLinesButton.addEventListener("click", () => {
+    gridLinesOn = !gridLinesOn;
+    const allDivs = document.querySelectorAll(".gridDiv");
+    if (gridLinesOn) {
+        allDivs.forEach((div) => div.classList.add("WithGridLines"));
+    } else {
+        allDivs.forEach((div) => div.classList.remove("WithGridLines"));
+    }
+
+});
 
 const clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", () => createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns));
