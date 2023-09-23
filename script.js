@@ -21,9 +21,14 @@ function createDivs (numberOfDivs) {
         grid.appendChild(div);
         div.addEventListener("mousemove", changeColor);
         div.addEventListener("click", changeColor);
-        // To disable the browers default dragging behavior
+        // Disable the browers default dragging behavior
         div.ondragstart = () => {return false};
     }
+    // Check for grid line toggle, as grid lines/div borders are a property of
+    // divs, which are cleared in this function, as such the lines should be redrawn
+    // if the toggle is set, if this isn't checked, clearing the grid would ALWAYS 
+    // clear all gridlines
+    toggleGridLines();
 }
 
 // Darken an RGB value by 10% by multiplying each value by 0.9
@@ -59,8 +64,13 @@ function changeColor(e) {
     this.style.backgroundColor = penColor;
 }
 
-function toggleGridLines(gridLinesBool) {
-    console.log("sup");
+function toggleGridLines() {
+    const allDivs = document.querySelectorAll(".gridDiv");
+    if (gridLinesOn) {
+        allDivs.forEach((div) => div.classList.add("WithGridLines"));
+    } else {
+        allDivs.forEach((div) => div.classList.remove("WithGridLines"));
+    }
 }
 
 // Track mousemove events only when when the mouse is down, instead of tracking
@@ -69,6 +79,7 @@ let mouseDown = false;
 document.addEventListener("mousedown", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
 
+let gridLinesOn = false;
 const grid = document.getElementById("grid");
 let numberOfRowsAndColumns = 32;
 let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
@@ -87,17 +98,10 @@ shaderButton.addEventListener("click", () => penMode = "shader");
 const eraserButton = document.getElementById("eraserButton");
 eraserButton.addEventListener("click", () => penMode = "erase");
 
-let gridLinesOn = false;
 const toggleGridLinesButton = document.getElementById("toggleGridLinesButton");
 toggleGridLinesButton.addEventListener("click", () => {
     gridLinesOn = !gridLinesOn;
-    const allDivs = document.querySelectorAll(".gridDiv");
-    if (gridLinesOn) {
-        allDivs.forEach((div) => div.classList.add("WithGridLines"));
-    } else {
-        allDivs.forEach((div) => div.classList.remove("WithGridLines"));
-    }
-
+    toggleGridLines();
 });
 
 const clearButton = document.getElementById("clearButton");
