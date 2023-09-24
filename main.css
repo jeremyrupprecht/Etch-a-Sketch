@@ -1,8 +1,4 @@
 html, body {
-    /*
-    margin: 0;
-    height: 100%;
-    */
     font-family: 'Roboto', sans-serif;
 }
 
@@ -16,13 +12,15 @@ body {
 }
 
 #title {
-    font-size: 112px;
+    font-size: 100px;
     color: white;
+    margin: 10px 0px 30px 0px;
 }
 
 #displayGridSize {
     text-align: center;
     font-size: 32px;
+    margin: 20px 0px 20px 0px;
 }
 
 #sideBar {
@@ -55,13 +53,13 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 }
 
 .rainbowButton, .shaderButton, .clearButton, .eraserButton, .blackButton, .toggleGridLinesButton, .colorButton {
-    height: 60px;
+    height: 40px;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 16px;
     background-color: rgb(19, 19, 19);
     border: 1px solid white;
     color: white;
-    margin-top: 40px;
+    margin-top: 30px;
     transition-duration: 0.2s;
 }
 
@@ -110,9 +108,9 @@ input[type="color"]::-webkit-color-swatch-wrapper {
     justify-content: space-between;
 
     background-color: grey;
-    height: 960px;
-    width: 960px;
-    align-self: center;
+    height: 704px;
+    width: 704px;
+    align-self: flex-start;
 }
 
 .gridDiv {
@@ -127,6 +125,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 #footer {
     text-align: center;
     margin-top: auto;
-    font-size: 32px;
+    font-size: 20px;
     color: white;
+    margin: 30px 0px 0px 0px;
 }

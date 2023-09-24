@@ -1,4 +1,4 @@
-const GRID_DIMENSIONS_IN_PIXELS = 960;
+const GRID_DIMENSIONS_IN_PIXELS = 704;
 
 function clearAllExistingDivs() {
     const allPreviousDivs = document.querySelectorAll(".gridDiv");
