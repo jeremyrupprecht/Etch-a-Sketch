@@ -54,7 +54,6 @@ function changeColor(e) {
     } else if (penMode === "erase") {
         penColor = "rgb(114, 111, 111)";
     }
-
     if (e.type === "click") {
         this.style.backgroundColor = penColor;
     }
@@ -73,8 +72,8 @@ function toggleGridLines() {
     }
 }
 
-function highlightSelectedButton(newMode) {
-
+function switchDrawingMode(newMode) {
+    // Remove the highlight effect on the previously selected/highlighted button
     switch(penMode) {
         case "black":
             drawButton.classList.remove("buttonActive");
@@ -89,7 +88,7 @@ function highlightSelectedButton(newMode) {
             eraserButton.classList.remove("buttonActive");
             break;
     }
-
+    // Add a highlight to the newly selected button
     switch(newMode) {
         case "black":
             drawButton.classList.add("buttonActive");
@@ -104,10 +103,11 @@ function highlightSelectedButton(newMode) {
             eraserButton.classList.add("buttonActive");
             break;
     }
+    penMode = newMode;
 }
 
-// Track mousemove events only when when the mouse is down, instead of tracking
-// mousedown events which have issues with dragging 
+// Track mousemove events (see line 22) only when when the mouse is down,
+// instead of directly tracking mousedown events which have issues with dragging 
 let mouseDown = false;
 document.addEventListener("mousedown", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
@@ -120,33 +120,26 @@ createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
 let penMode = "black";
 const drawButton = document.querySelector(".drawButton");
-drawButton.addEventListener("click", () => {
-    highlightSelectedButton("black");
-    penMode = "black";
-});
+drawButton.addEventListener("click", () => switchDrawingMode("black"));
 
 const rainbowButton = document.querySelector(".rainbowButton");
-rainbowButton.addEventListener("click", () => {
-    highlightSelectedButton("rainbow");
-    penMode = "rainbow";
-});
+rainbowButton.addEventListener("click", () => switchDrawingMode("rainbow"));
 
 const shaderButton = document.querySelector(".shaderButton");
-shaderButton.addEventListener("click", () => {
-    highlightSelectedButton("shader");
-    penMode = "shader";
-});
+shaderButton.addEventListener("click", () => switchDrawingMode("shader"));
 
 const eraserButton = document.querySelector(".eraserButton");
-eraserButton.addEventListener("click", () => {
-    highlightSelectedButton("erase");
-    penMode = "erase";
-});
+eraserButton.addEventListener("click", () => switchDrawingMode("erase"));
 
 const toggleGridLinesButton = document.querySelector(".toggleGridLinesButton");
 toggleGridLinesButton.addEventListener("click", () => {
     gridLinesOn = !gridLinesOn;
     toggleGridLines();
+    if (gridLinesOn) {
+        toggleGridLinesButton.classList.add("buttonActive");
+    } else {
+        toggleGridLinesButton.classList.remove("buttonActive");
+    }
 });
 
 const clearButton = document.querySelector(".clearButton");
