@@ -25,9 +25,9 @@ function createDivs (numberOfDivs) {
         div.ondragstart = () => {return false};
     }
     // Check for grid line toggle, as grid lines/div borders are a property of
-    // divs, which are cleared in this function, as such the lines should be redrawn
-    // if the toggle is set, if this isn't checked, clearing the grid would ALWAYS 
-    // clear all gridlines
+    // divs, which are removed and recreated in this function, as such the lines 
+    // should be redrawn if the toggle is set, if this isn't checked, clearing the 
+    // grid would ALWAYS clear all gridlines
     toggleGridLines();
 }
 
@@ -44,8 +44,10 @@ function darkenColorTenPercent(color) {
     return rgbColor; 
 }
 
-function changeColor(e) {    
-    if (penMode === "black") {
+function changeColor(e) {
+    if (penMode === "color") {
+        penColor = colorPicker.value;
+    } else if (penMode === "black") {
         penColor = "black";
     } else if (penMode === "rainbow") {
         penColor ="#" + Math.floor(Math.random()*16777215).toString(16);
@@ -75,8 +77,11 @@ function toggleGridLines() {
 function switchDrawingMode(newMode) {
     // Remove the highlight effect on the previously selected/highlighted button
     switch(penMode) {
+        case "color":
+            colorButton.classList.remove("buttonActive");
+            break;
         case "black":
-            drawButton.classList.remove("buttonActive");
+            blackButton.classList.remove("buttonActive");
             break;
         case "rainbow":
             rainbowButton.classList.remove("buttonActive");
@@ -90,8 +95,11 @@ function switchDrawingMode(newMode) {
     }
     // Add a highlight to the newly selected button
     switch(newMode) {
+        case "color":
+            colorButton.classList.add("buttonActive");
+            break;
         case "black":
-            drawButton.classList.add("buttonActive");
+            blackButton.classList.add("buttonActive");
             break;
         case "rainbow":
             rainbowButton.classList.add("buttonActive");
@@ -114,13 +122,27 @@ document.addEventListener("mouseup", () => mouseDown = false);
 
 let gridLinesOn = false;
 const grid = document.getElementById("grid");
-let numberOfRowsAndColumns = 32;
+let numberOfRowsAndColumns = 40;
 let divSize = GRID_DIMENSIONS_IN_PIXELS / numberOfRowsAndColumns;
 createDivs(numberOfRowsAndColumns * numberOfRowsAndColumns);
 
-let penMode = "black";
-const drawButton = document.querySelector(".drawButton");
-drawButton.addEventListener("click", () => switchDrawingMode("black"));
+const defaultPenMode = "black";
+let penMode = defaultPenMode;
+
+const colorPickerDefaultColor = "#000000";
+let colorPicker = document.querySelector("#colorPicker");
+colorPicker.value = colorPickerDefaultColor;
+colorPicker.addEventListener("change", (e) => {
+    switchDrawingMode("color");
+    colorPicker.value = e.target.value;
+});
+colorPicker.select();
+
+const colorButton = document.querySelector(".colorButton");
+colorButton.addEventListener("click", () => switchDrawingMode("color"));
+
+const blackButton = document.querySelector(".blackButton");
+blackButton.addEventListener("click", () => switchDrawingMode("black"));
 
 const rainbowButton = document.querySelector(".rainbowButton");
 rainbowButton.addEventListener("click", () => switchDrawingMode("rainbow"));

@@ -35,7 +35,24 @@ body {
     margin-right: 30px;
 }
 
-.rainbowButton, .shaderButton, .clearButton, .eraserButton, .drawButton, .toggleGridLinesButton {
+#colorPicker {
+    width: 300px;
+    height: 100px;
+}
+
+/* Remove color picker border */
+input[type="color"] {
+    border-radius: 0px;
+    padding: 0;
+    border: 0px solid #DDD;
+}
+  
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 0;
+}
+
+.rainbowButton, .shaderButton, .clearButton, .eraserButton, .blackButton, .toggleGridLinesButton, .colorButton {
     height: 60px;
     border-radius: 10px;
     font-size: 24px;
@@ -46,7 +63,7 @@ body {
     transition-duration: 0.2s;
 }
 
-.rainbowButton:hover, .shaderButton:hover, .clearButton:hover, .eraserButton:hover, .drawButton:hover, .toggleGridLinesButton:hover {
+.rainbowButton:hover, .shaderButton:hover, .clearButton:hover, .eraserButton:hover, .blackButton:hover, .toggleGridLinesButton:hover, .colorButton:hover {
     transform: scale(1.1);
 }
 
@@ -55,7 +72,6 @@ body {
 }
 
 /* Range slider */
-
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -85,9 +101,7 @@ body {
     cursor: pointer;
   }
 
-
 /* Grid */
-
 #grid {
     display: flex;
     flex-wrap: wrap;
